@@ -248,6 +248,7 @@ typedef void(^PTLoginCallback)(BOOL successed);
         if ([obj.message.localID isEqualToString:command.localID]) {
             obj.callback(YES);
             *stop = YES;
+            [self.didSentMessage removeObjectAtIndex:idx];
         }
     }];
 }

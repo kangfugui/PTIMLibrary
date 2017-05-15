@@ -1,0 +1,23 @@
+//
+//  PTIM.m
+//  PTIMLibrary
+//
+//  Created by admin on 2017/5/15.
+//  Copyright © 2017年 Putao. All rights reserved.
+//
+
+#import "PTIM.h"
+
+@implementation PTIM
+
++ (void)registerWithConfigure:(PTIMConfigure * _Nonnull)configure
+                     callback:(void (^_Nonnull)(BOOL successed))callback {
+    [[PTIMClient shared] registerWithConfigure:configure callback:callback];
+}
+
++ (void)sendCommand:(PTCommandMessage * _Nonnull)command
+           callback:(PTIMSendCommandCallback _Nonnull)callback {
+    [[PTIMClient shared] sendCommand:command callback:callback];
+}
+
+@end

@@ -25,8 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configure.deviceID = "F27CC377-F54D-44AE-95D2-202D531473D5"
         configure.domain = .test
         
-        let client = PTIMClient.shared()
-        client.register(with: configure) { (successed) in
+        PTIM.register(with: configure) { (successed) in
             print(successed)
         }
         

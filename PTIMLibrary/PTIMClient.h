@@ -39,6 +39,6 @@ typedef NS_ENUM (NSUInteger, PTIMConnectStatus) {
                      callback:(void (^_Nonnull)(BOOL successed))callback;
 
 - (void)sendCommand:(PTCommandMessage * _Nonnull)command
-           callback:(PTIMSendCommandCallback _Nonnull )callback;
+           callback:(PTIMSendCommandCallback _Nonnull)callback;
 
 @end

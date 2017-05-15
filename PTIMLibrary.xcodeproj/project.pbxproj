@@ -33,6 +33,8 @@
 		84CF5C871EC98B1A00D92B81 /* PTCommandMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF5C851EC98B1A00D92B81 /* PTCommandMessage.m */; };
 		84CF5C8A1EC9AF0500D92B81 /* PTMessageContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF5C881EC9AF0500D92B81 /* PTMessageContainer.h */; };
 		84CF5C8B1EC9AF0500D92B81 /* PTMessageContainer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84CF5C891EC9AF0500D92B81 /* PTMessageContainer.mm */; };
+		84CF5C921EC9D06A00D92B81 /* PTIM.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF5C901EC9D06A00D92B81 /* PTIM.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84CF5C931EC9D06A00D92B81 /* PTIM.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF5C911EC9D06A00D92B81 /* PTIM.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,8 @@
 		84CF5C851EC98B1A00D92B81 /* PTCommandMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTCommandMessage.m; sourceTree = "<group>"; };
 		84CF5C881EC9AF0500D92B81 /* PTMessageContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTMessageContainer.h; sourceTree = "<group>"; };
 		84CF5C891EC9AF0500D92B81 /* PTMessageContainer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PTMessageContainer.mm; sourceTree = "<group>"; };
+		84CF5C901EC9D06A00D92B81 /* PTIM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTIM.h; sourceTree = "<group>"; };
+		84CF5C911EC9D06A00D92B81 /* PTIM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTIM.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,8 @@
 				84CF5C851EC98B1A00D92B81 /* PTCommandMessage.m */,
 				84CF5C881EC9AF0500D92B81 /* PTMessageContainer.h */,
 				84CF5C891EC9AF0500D92B81 /* PTMessageContainer.mm */,
+				84CF5C901EC9D06A00D92B81 /* PTIM.h */,
+				84CF5C911EC9D06A00D92B81 /* PTIM.m */,
 				849030D71EC45CA500EBFF83 /* Info.plist */,
 			);
 			path = PTIMLibrary;
@@ -196,6 +202,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84CF5C921EC9D06A00D92B81 /* PTIM.h in Headers */,
 				849030D81EC45CA500EBFF83 /* PTIMLibrary.h in Headers */,
 				84CF5C821EC585F500D92B81 /* PTIMConfigure.h in Headers */,
 				849030FF1EC45DDF00EBFF83 /* IMBaseDef.hpp in Headers */,
@@ -312,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				849031111EC4655400EBFF83 /* PTIMClient.mm in Sources */,
+				84CF5C931EC9D06A00D92B81 /* PTIM.m in Sources */,
 				84CF5C871EC98B1A00D92B81 /* PTCommandMessage.m in Sources */,
 				84CF5C8B1EC9AF0500D92B81 /* PTMessageContainer.mm in Sources */,
 				84CF5C831EC585F500D92B81 /* PTIMConfigure.m in Sources */,
