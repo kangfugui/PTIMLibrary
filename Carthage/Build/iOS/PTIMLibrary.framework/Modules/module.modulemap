@@ -1,0 +1,6 @@
+framework module PTIMLibrary {
+  umbrella header "PTIMLibrary.h"
+
+  export *
+  module * { export * }
+}
