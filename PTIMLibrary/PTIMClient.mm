@@ -9,6 +9,7 @@
 #import "PTIMClient.h"
 #import "IMClientInterface.hpp"
 #import "PTIMHandler.h"
+#import "PTMessageContainer.h"
 #import <iostream>
 
 FOUNDATION_EXTERN NSString * const baseURL_Test = @"http://10.1.11.177:8090/msg_server";
@@ -16,6 +17,7 @@ FOUNDATION_EXTERN NSString * const baseURL_Production = @"http://webrtc-im-gatew
 FOUNDATION_EXTERN NSString * const kIMConnectTimeoutNotify = @"com.putao.im.connect.timeout";
 FOUNDATION_EXTERN NSString * const kIMConnectSuccessNotify = @"com.putao.im.connect.success";
 FOUNDATION_EXTERN NSString * const kIMLoginFinishNotify = @"com.putao.im.login.success";
+FOUNDATION_EXTERN NSString * const kIMReceiveConfirmNotify = @"com.putao.im.receive.confirm";
 
 using namespace PT::IM;
 using namespace std;
@@ -31,6 +33,7 @@ typedef void(^PTLoginCallback)(BOOL successed);
 
 @property (copy, nonatomic) PTConnectCallback connectCallback;
 @property (copy, nonatomic) PTLoginCallback loginCallback;
+@property (strong, nonatomic) NSMutableArray<PTMessageContainer *> *didSentMessage;
 
 @end
 
@@ -44,6 +47,7 @@ typedef void(^PTLoginCallback)(BOOL successed);
             handler = new PTIMHandler(pIMClient, true);
         
         _connectCount = 0;
+        self.didSentMessage = [[NSMutableArray alloc] init];
         [self registerNotifications];
     }
     return self;
@@ -85,7 +89,12 @@ typedef void(^PTLoginCallback)(BOOL successed);
     }];
 }
 
-- (void)sendCommand:(PTCommandMessage *)command {
+- (void)sendCommand:(PTCommandMessage *)command
+           callback:(PTIMSendCommandCallback)callback {
+    
+    PTMessageContainer *container = [[PTMessageContainer alloc] initWithMessage:command
+                                                                       callback:callback];
+    [self.didSentMessage addObject:container];
     
     pIMClient->command_peer(command.localID.UTF8String,
                             command.toUsrID,
@@ -195,6 +204,11 @@ typedef void(^PTLoginCallback)(BOOL successed);
                selector:@selector(receiveIMLoginSuccessNotify:)
                    name:kIMLoginFinishNotify
                  object:nil];
+    
+    [center addObserver:self
+               selector:@selector(receiveConfirmNotify:)
+                   name:kIMReceiveConfirmNotify
+                 object:nil];
 }
 
 - (void)unregisterNotifications {
@@ -202,6 +216,7 @@ typedef void(^PTLoginCallback)(BOOL successed);
     [center removeObserver:self name:kIMConnectSuccessNotify object:nil];
     [center removeObserver:self name:kIMConnectTimeoutNotify object:nil];
     [center removeObserver:self name:kIMLoginFinishNotify object:nil];
+    [center removeObserver:self name:kIMReceiveConfirmNotify object:nil];
 }
 
 - (void)receiveIMConnectSuccessNotify:(NSNotification *)sender {
@@ -224,6 +239,17 @@ typedef void(^PTLoginCallback)(BOOL successed);
     if (self.loginCallback) {
         self.loginCallback(result);
     }
+}
+
+- (void)receiveConfirmNotify:(NSNotification *)sender {
+    
+    PTCommandMessage *command = sender.userInfo[@"msg"];
+    [self.didSentMessage enumerateObjectsUsingBlock:^(PTMessageContainer *obj, NSUInteger idx, BOOL *stop) {
+        if ([obj.message.localID isEqualToString:command.localID]) {
+            obj.callback(YES);
+            *stop = YES;
+        }
+    }];
 }
 
 @end

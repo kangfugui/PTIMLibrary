@@ -21,6 +21,8 @@ typedef NS_ENUM (NSUInteger, PTIMMessageType) {
 
 @property (assign, nonatomic) int toUsrID;
 
+@property (assign, nonatomic) int fromUsrID;
+
 @property (assign, nonatomic) int timeout;
 
 @end

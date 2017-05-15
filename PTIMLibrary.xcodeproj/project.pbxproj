@@ -31,6 +31,8 @@
 		84CF5C831EC585F500D92B81 /* PTIMConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF5C811EC585F500D92B81 /* PTIMConfigure.m */; };
 		84CF5C861EC98B1A00D92B81 /* PTCommandMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF5C841EC98B1A00D92B81 /* PTCommandMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84CF5C871EC98B1A00D92B81 /* PTCommandMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF5C851EC98B1A00D92B81 /* PTCommandMessage.m */; };
+		84CF5C8A1EC9AF0500D92B81 /* PTMessageContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF5C881EC9AF0500D92B81 /* PTMessageContainer.h */; };
+		84CF5C8B1EC9AF0500D92B81 /* PTMessageContainer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84CF5C891EC9AF0500D92B81 /* PTMessageContainer.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +86,8 @@
 		84CF5C811EC585F500D92B81 /* PTIMConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTIMConfigure.m; sourceTree = "<group>"; };
 		84CF5C841EC98B1A00D92B81 /* PTCommandMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTCommandMessage.h; sourceTree = "<group>"; };
 		84CF5C851EC98B1A00D92B81 /* PTCommandMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTCommandMessage.m; sourceTree = "<group>"; };
+		84CF5C881EC9AF0500D92B81 /* PTMessageContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTMessageContainer.h; sourceTree = "<group>"; };
+		84CF5C891EC9AF0500D92B81 /* PTMessageContainer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PTMessageContainer.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +147,8 @@
 				84CF5C811EC585F500D92B81 /* PTIMConfigure.m */,
 				84CF5C841EC98B1A00D92B81 /* PTCommandMessage.h */,
 				84CF5C851EC98B1A00D92B81 /* PTCommandMessage.m */,
+				84CF5C881EC9AF0500D92B81 /* PTMessageContainer.h */,
+				84CF5C891EC9AF0500D92B81 /* PTMessageContainer.mm */,
 				849030D71EC45CA500EBFF83 /* Info.plist */,
 			);
 			path = PTIMLibrary;
@@ -196,6 +202,7 @@
 				849031101EC4655400EBFF83 /* PTIMClient.h in Headers */,
 				849031081EC4647000EBFF83 /* PTIMHandler.h in Headers */,
 				84CF5C861EC98B1A00D92B81 /* PTCommandMessage.h in Headers */,
+				84CF5C8A1EC9AF0500D92B81 /* PTMessageContainer.h in Headers */,
 				849031001EC45DDF00EBFF83 /* IMClientInterface.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,6 +313,7 @@
 			files = (
 				849031111EC4655400EBFF83 /* PTIMClient.mm in Sources */,
 				84CF5C871EC98B1A00D92B81 /* PTCommandMessage.m in Sources */,
+				84CF5C8B1EC9AF0500D92B81 /* PTMessageContainer.mm in Sources */,
 				84CF5C831EC585F500D92B81 /* PTIMConfigure.m in Sources */,
 				849031091EC4647000EBFF83 /* PTIMHandler.mm in Sources */,
 			);

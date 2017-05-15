@@ -77,16 +77,24 @@ void PTIMHandler::onKicked(PT::IM::IMReturnCode rc) {
 
 void PTIMHandler::on_command_peer(PT::IM::IMReturnCode rc, uint32_t from_uid, const std::string &local_id, const std::string &msg) {
     
-    NSString *msgString = [NSString stringWithCString:msg.c_str() encoding:NSUTF8StringEncoding];
-    NSString *local_idString = [NSString stringWithCString:local_id.c_str() encoding:NSUTF8StringEncoding];
-    NSString *string = [NSString stringWithFormat:@"from_uid:%@\nlocal_id:%@\nmsg:%@",@(from_uid), local_idString, msgString];
-    NSDictionary *dict = @{@"from_uid":@(from_uid), @"local_id":local_idString, @"msg":msgString};
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"kRecevieCommandNotification" object:dict];
-    
-    printf("----- on_command_peer: %s -----\n", [string UTF8String]);
+//    NSString *msgString = [NSString stringWithCString:msg.c_str() encoding:NSUTF8StringEncoding];
+//    NSString *local_idString = [NSString stringWithCString:local_id.c_str() encoding:NSUTF8StringEncoding];
+//    NSString *string = [NSString stringWithFormat:@"from_uid:%@\nlocal_id:%@\nmsg:%@",@(from_uid), local_idString, msgString];
+//    NSDictionary *dict = @{@"from_uid":@(from_uid), @"local_id":local_idString, @"msg":msgString};
+//    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"kRecevieCommandNotification" object:dict];
+//    
+//    printf("----- on_command_peer: %s -----\n", [string UTF8String]);
 }
 
 void PTIMHandler::on_confirm_peer(IMReturnCode rc, uint32_t from_uid, const std::string &local_id, const std::string &msg){
     printf("\non_confirm_peer: %s\n", [[NSString stringWithCString:msg.c_str() encoding:NSUTF8StringEncoding] UTF8String]);
+    
+    PTCommandMessage *message = [[PTCommandMessage alloc] init];
+    message.localID = [NSString stringWithCString:local_id.c_str() encoding:NSUTF8StringEncoding];
+    message.content = [NSString stringWithCString:msg.c_str() encoding:NSUTF8StringEncoding];
+    message.fromUsrID = from_uid;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kIMReceiveConfirmNotify
+                                                        object:nil
+                                                      userInfo:@{@"msg": message}];
 }
