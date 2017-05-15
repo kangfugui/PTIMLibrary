@@ -18,4 +18,4 @@ FOUNDATION_EXPORT const unsigned char PTIMLibraryVersionString[];
 
 #import "PTIMClient.h"
 #import "PTIMConfigure.h"
-
+#import "PTCommandMessage.h"

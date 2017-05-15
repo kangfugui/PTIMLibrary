@@ -22,11 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configure.usrID = "60004330"
         configure.appID = 8101
         configure.pushToken = "fjalsdflajdfiaejflkdajfl"
-        configure.deviceID = NSUUID().uuidString
+        configure.deviceID = "F27CC377-F54D-44AE-95D2-202D531473D5"
         configure.domain = .test
         
         let client = PTIMClient.shared()
-        client.register(with: configure)
+        client.register(with: configure) { (successed) in
+            print(successed)
+        }
         
         return true
     }

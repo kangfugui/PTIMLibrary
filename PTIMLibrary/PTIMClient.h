@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "PTIMConfigure.h"
+#import "PTCommandMessage.h"
 
 FOUNDATION_EXTERN NSString * _Nonnull const kIMConnectTimeoutNotify;
 FOUNDATION_EXTERN NSString * _Nonnull const kIMConnectSuccessNotify;
-FOUNDATION_EXTERN NSString * _Nonnull const kIMLoginSuccessNotify;
-FOUNDATION_EXTERN NSString * _Nonnull const kIMLoginFailureNotify;
+FOUNDATION_EXTERN NSString * _Nonnull const kIMLoginFinishNotify;
 
 typedef NS_ENUM (NSUInteger, PTIMConnectStatus) {
     PTIMConnectStatusNone = 0,
@@ -32,6 +32,7 @@ typedef NS_ENUM (NSUInteger, PTIMConnectStatus) {
 
 + (instancetype _Nonnull)shared;
 
-- (void)registerWithConfigure:(PTIMConfigure * _Nonnull)configure;
+- (void)registerWithConfigure:(PTIMConfigure * _Nonnull)configure
+                     callback:(void (^_Nonnull)(BOOL successed))callback;
 
 @end

@@ -41,11 +41,14 @@ void PTIMHandler::onLoginConnnectInfo(IMReturnCode rc, const UIMLoginServerInfo 
  * 登录响应回调，指示是否成功登录，并返回登录者的部分信息
  */
 void PTIMHandler::onLogin(IMReturnCode rc, const UIMUserInfo *info) {
+    
+    BOOL successed = rc == IMRC_OK;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kIMLoginFinishNotify
+                                                        object:nil
+                                                      userInfo:@{@"result":@(successed)}];
     if (rc == IMRC_OK) {
         printf("----- 登录成功 -----\n");
-        [[NSNotificationCenter defaultCenter] postNotificationName:kIMLoginSuccessNotify
-                                                            object:nil
-                                                          userInfo:nil];
     }
 }
 

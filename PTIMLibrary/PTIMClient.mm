@@ -11,24 +11,27 @@
 #import "PTIMHandler.h"
 #import <iostream>
 
-FOUNDATION_EXTERN NSString * const baseURL_Test = @"http://gate-putao-im.ptdev.cn/msg_server";
-FOUNDATION_EXTERN NSString * const baseURL_Production = @"http://gate-putao-im-online.putao.com/msg_server";
+FOUNDATION_EXTERN NSString * const baseURL_Test = @"http://10.1.11.177:8090/msg_server";
+FOUNDATION_EXTERN NSString * const baseURL_Production = @"http://webrtc-im-gateway.putao.com/msg_server";
 FOUNDATION_EXTERN NSString * const kIMConnectTimeoutNotify = @"com.putao.im.connect.timeout";
 FOUNDATION_EXTERN NSString * const kIMConnectSuccessNotify = @"com.putao.im.connect.success";
-FOUNDATION_EXTERN NSString * const kIMLoginSuccessNotify = @"com.putao.im.login.success";
-FOUNDATION_EXTERN NSString * const kIMLoginFailureNotify = @"com.putao.im.login.failure";
+FOUNDATION_EXTERN NSString * const kIMLoginFinishNotify = @"com.putao.im.login.success";
 
 using namespace PT::IM;
 using namespace std;
 
 typedef void(^PTConnectCallback)(BOOL successed);
+typedef void(^PTLoginCallback)(BOOL successed);
 
 @interface PTIMClient() {
     PTIMHandler *handler;
     IMClientInterface *pIMClient;
     NSInteger _connectCount;
 }
+
 @property (copy, nonatomic) PTConnectCallback connectCallback;
+@property (copy, nonatomic) PTLoginCallback loginCallback;
+
 @end
 
 @implementation PTIMClient
@@ -36,7 +39,7 @@ typedef void(^PTConnectCallback)(BOOL successed);
 - (instancetype)init {
     if (self = [super init]) {
         if (!pIMClient)
-            pIMClient = IMClnt_Create(true);
+            pIMClient = IMClnt_Create(false);
         if (!handler)
             handler = new PTIMHandler(pIMClient, true);
         
@@ -61,32 +64,36 @@ typedef void(^PTConnectCallback)(BOOL successed);
     return _shared;
 }
 
-- (void)receiveIMConnectSuccessNotify:(NSNotification *)sender {
-    if (self.connectCallback) {
-        self.connectCallback(YES);
-    }
-}
-
-- (void)receiveIMConnectTimeoutNotify:(NSNotification *)sender {
-    if (self.connectCallback) {
-        self.connectCallback(NO);
-    }
-}
-
-- (void)registerWithConfigure:(PTIMConfigure *)configure {
+- (void)registerWithConfigure:(PTIMConfigure *)configure
+                     callback:(void (^)(BOOL successed))callback {
     
     __weak __typeof(self) weak_self = self;
     [self connectWithDomain:configure.domain callback:^(BOOL successed) {
         if (successed) {
-            [weak_self loginWithUsrID:configure.usrID
-                                appID:configure.appID
-                             deviceID:configure.deviceID
-                                token:configure.pushToken];
+            
+            [weak_self
+             loginWithUsrID:configure.usrID
+             appID:configure.appID
+             deviceID:configure.deviceID
+             token:configure.pushToken
+             callback:^(BOOL successed) {
+                 callback(successed);
+            }];
+        } else {
+            callback(NO);
         }
     }];
 }
 
+- (void)sendCommand:(PTCommandMessage *)command {
+    
+    pIMClient->command_peer(command.localID.UTF8String,
+                            command.toUsrID,
+                            command.content.UTF8String);
+}
+
 //MARK: - 登录处理
+
 /** 连接服务器 */
 
 - (void)connectWithDomain:(PTIMServiceDomain)domain callback:(PTConnectCallback)callback {
@@ -138,8 +145,10 @@ typedef void(^PTConnectCallback)(BOOL successed);
 - (void)loginWithUsrID:(NSString *)UsrID
                  appID:(int)appID
               deviceID:(NSString *)deviceID
-                 token:(NSString *)token {
+                 token:(NSString *)token
+              callback:(PTLoginCallback)callback {
     
+    self.loginCallback = callback;
     UIMLoginTokenInfo info;
     info.usrId = UsrID.intValue;
     info.appId = appID;
@@ -150,16 +159,16 @@ typedef void(^PTConnectCallback)(BOOL successed);
     
     IMReturnCode rc = pIMClient->login(info);
     if (rc != IMRC_OK) {
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kIMLoginFailureNotify
+        [[NSNotificationCenter defaultCenter] postNotificationName:kIMLoginFinishNotify
                                                             object:nil
-                                                          userInfo:nil];
+                                                          userInfo:@{@"result":@(NO)}];
     }
     
     self.currentStatus = PTIMConnectStatusLogining;
 }
 
 /** 退出登录 */
+
 - (BOOL)logout {
     IMReturnCode rc = pIMClient->logout();
     if (rc == IMRC_OK) {
@@ -168,6 +177,7 @@ typedef void(^PTConnectCallback)(BOOL successed);
     return false;
 }
 
+// MARK: Notification
 
 - (void)registerNotifications {
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
@@ -180,12 +190,40 @@ typedef void(^PTConnectCallback)(BOOL successed);
                selector:@selector(receiveIMConnectTimeoutNotify:)
                    name:kIMConnectTimeoutNotify
                  object:nil];
+    
+    [center addObserver:self
+               selector:@selector(receiveIMLoginSuccessNotify:)
+                   name:kIMLoginFinishNotify
+                 object:nil];
 }
 
 - (void)unregisterNotifications {
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center removeObserver:self name:kIMConnectSuccessNotify object:nil];
     [center removeObserver:self name:kIMConnectTimeoutNotify object:nil];
+    [center removeObserver:self name:kIMLoginFinishNotify object:nil];
+}
+
+- (void)receiveIMConnectSuccessNotify:(NSNotification *)sender {
+    self.currentStatus = PTIMConnectStatusConnectSuccess;
+    if (self.connectCallback) {
+        self.connectCallback(YES);
+    }
+}
+
+- (void)receiveIMConnectTimeoutNotify:(NSNotification *)sender {
+    self.currentStatus = PTIMConnectStatusConnectFail;
+    if (self.connectCallback) {
+        self.connectCallback(NO);
+    }
+}
+
+- (void)receiveIMLoginSuccessNotify:(NSNotification *)sender {
+    BOOL result = [sender.userInfo[@"result"] boolValue];
+    self.currentStatus = result ? PTIMConnectStatusLoginSuccess : PTIMConnectStatusLoginFail;
+    if (self.loginCallback) {
+        self.loginCallback(result);
+    }
 }
 
 @end
