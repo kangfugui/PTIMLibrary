@@ -94,11 +94,15 @@ typedef void(^PTLoginCallback)(BOOL successed);
     
     PTMessageContainer *container = [[PTMessageContainer alloc] initWithMessage:command
                                                                        callback:callback];
-    [self.didSentMessage addObject:container];
     
-    pIMClient->command_peer(command.localID.UTF8String,
-                            command.toUsrID,
-                            command.content.UTF8String);
+    IMReturnCode rc = pIMClient->command_peer(command.localID.UTF8String,
+                                              command.toUsrID,
+                                              command.content.UTF8String);
+    if (rc != IMRC_OK) {
+        callback(NO);
+    } else {
+        [self.didSentMessage addObject:container];
+    }
 }
 
 //MARK: - 登录处理
