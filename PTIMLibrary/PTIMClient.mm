@@ -99,7 +99,7 @@ typedef void(^PTLoginCallback)(BOOL successed);
                                               command.toUsrID,
                                               command.content.UTF8String);
     if (rc != IMRC_OK) {
-        callback(NO);
+        callback(NO, nil);
     } else {
         [self.didSentMessage addObject:container];
     }
@@ -247,10 +247,10 @@ typedef void(^PTLoginCallback)(BOOL successed);
 
 - (void)receiveConfirmNotify:(NSNotification *)sender {
     
-    PTCommandMessage *command = sender.userInfo[@"msg"];
+    PTCommandMessage *result = sender.userInfo[@"msg"];
     [self.didSentMessage enumerateObjectsUsingBlock:^(PTMessageContainer *obj, NSUInteger idx, BOOL *stop) {
-        if ([obj.message.localID isEqualToString:command.localID]) {
-            obj.callback(YES);
+        if ([obj.message.localID isEqualToString:result.localID]) {
+            obj.callback(YES, result);
             *stop = YES;
             [self.didSentMessage removeObjectAtIndex:idx];
         }

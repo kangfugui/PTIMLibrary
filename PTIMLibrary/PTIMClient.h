@@ -15,7 +15,7 @@ FOUNDATION_EXTERN NSString * _Nonnull const kIMConnectSuccessNotify;
 FOUNDATION_EXTERN NSString * _Nonnull const kIMLoginFinishNotify;
 FOUNDATION_EXTERN NSString * _Nonnull const kIMReceiveConfirmNotify;
 
-typedef void(^PTIMSendCommandCallback)(BOOL successed);
+typedef void(^PTIMSendCommandCallback)(BOOL successed, PTCommandMessage * _Nullable result);
 
 typedef NS_ENUM (NSUInteger, PTIMConnectStatus) {
     PTIMConnectStatusNone = 0,
