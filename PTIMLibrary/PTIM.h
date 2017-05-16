@@ -19,4 +19,8 @@
 + (void)sendCommand:(PTCommandMessage * _Nonnull)command
            callback:(PTIMSendCommandCallback _Nonnull)callback;
 
++ (BOOL)logout;
+
++ (void)disConnect;
+
 @end

@@ -24,4 +24,12 @@
     [[PTIMClient shared] sendCommand:command callback:callback];
 }
 
++ (BOOL)logout {
+    return [[PTIMClient shared] logout];
+}
+
++ (void)disConnect {
+    [[PTIMClient shared] disConnect];
+}
+
 @end
