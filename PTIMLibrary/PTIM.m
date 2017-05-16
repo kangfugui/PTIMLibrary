@@ -10,6 +10,10 @@
 
 @implementation PTIM
 
++ (PTIMConnectStatus)currentStatus {
+    return [PTIMClient shared].currentStatus;
+}
+
 + (void)registerWithConfigure:(PTIMConfigure * _Nonnull)configure
                      callback:(void (^_Nonnull)(BOOL successed))callback {
     [[PTIMClient shared] registerWithConfigure:configure callback:callback];

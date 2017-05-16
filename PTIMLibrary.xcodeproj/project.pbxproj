@@ -25,6 +25,7 @@
 		849031091EC4647000EBFF83 /* PTIMHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 849031071EC4647000EBFF83 /* PTIMHandler.mm */; };
 		849031101EC4655400EBFF83 /* PTIMClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 8490310E1EC4655400EBFF83 /* PTIMClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		849031111EC4655400EBFF83 /* PTIMClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8490310F1EC4655400EBFF83 /* PTIMClient.mm */; };
+		84C09BC31ECAA0C30078A9EF /* PTCommandContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C09BC21ECAA0C30078A9EF /* PTCommandContent.swift */; };
 		84CF5C7A1EC47B3A00D92B81 /* PTIMLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849030D31EC45CA500EBFF83 /* PTIMLibrary.framework */; };
 		84CF5C7C1EC47B3D00D92B81 /* PTIMLibrary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 849030D31EC45CA500EBFF83 /* PTIMLibrary.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84CF5C821EC585F500D92B81 /* PTIMConfigure.h in Headers */ = {isa = PBXBuildFile; fileRef = 84CF5C801EC585F500D92B81 /* PTIMConfigure.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -84,6 +85,7 @@
 		849031071EC4647000EBFF83 /* PTIMHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PTIMHandler.mm; sourceTree = "<group>"; };
 		8490310E1EC4655400EBFF83 /* PTIMClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTIMClient.h; sourceTree = "<group>"; };
 		8490310F1EC4655400EBFF83 /* PTIMClient.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PTIMClient.mm; sourceTree = "<group>"; };
+		84C09BC21ECAA0C30078A9EF /* PTCommandContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTCommandContent.swift; sourceTree = "<group>"; };
 		84CF5C801EC585F500D92B81 /* PTIMConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTIMConfigure.h; sourceTree = "<group>"; };
 		84CF5C811EC585F500D92B81 /* PTIMConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTIMConfigure.m; sourceTree = "<group>"; };
 		84CF5C841EC98B1A00D92B81 /* PTCommandMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTCommandMessage.h; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			children = (
 				849030E71EC45D3100EBFF83 /* AppDelegate.swift */,
 				849030E91EC45D3100EBFF83 /* ViewController.swift */,
+				84C09BC21ECAA0C30078A9EF /* PTCommandContent.swift */,
 				849030EB1EC45D3100EBFF83 /* Main.storyboard */,
 				849030EE1EC45D3100EBFF83 /* Assets.xcassets */,
 				849030F01EC45D3100EBFF83 /* LaunchScreen.storyboard */,
@@ -331,6 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84C09BC31ECAA0C30078A9EF /* PTCommandContent.swift in Sources */,
 				849030EA1EC45D3100EBFF83 /* ViewController.swift in Sources */,
 				849030E81EC45D3100EBFF83 /* AppDelegate.swift in Sources */,
 			);

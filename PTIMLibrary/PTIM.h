@@ -11,6 +11,8 @@
 
 @interface PTIM : NSObject
 
++ (PTIMConnectStatus)currentStatus;
+
 + (void)registerWithConfigure:(PTIMConfigure * _Nonnull)configure
                      callback:(void (^_Nonnull)(BOOL successed))callback;
 
