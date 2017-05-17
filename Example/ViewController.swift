@@ -11,7 +11,7 @@ import PTIMLibrary
 
 class ViewController: UIViewController {
     
-    let childrenID: Int32 = 10000
+    let childrenID: Int32 = 60011165
     let appID: String = "1105"
 
     override func viewDidLoad() {
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         
         var content = [String: Any]()
         content["state"] = true
-        content["lockdelay"] = 5
+        content["lockdelay"] = 1
         
         var value = [String: Any]()
         value["appid"] = appID
@@ -49,8 +49,8 @@ class ViewController: UIViewController {
         
         var content = [String: Any]()
         content["state"] = true
-        content["availabletime"] = 20
-        content["resttime"] = 5
+        content["availabletime"] = 2
+        content["resttime"] = 1
         
         var value = [String: Any]()
         value["appid"] = appID
@@ -76,9 +76,9 @@ class ViewController: UIViewController {
         
         var content = [String: Any]()
         content["state"] = true
-        content["start"] = 1494979200
-        content["end"] = 1494993600
-        content["repeat"] = "1,2,3,4,5"
+        content["start"] = 1495003500000
+        content["end"] = 1495003560000
+        content["repeat"] = "1,2,3,4,5" //不重复传空字符串
         
         var value = [String: Any]()
         value["appid"] = appID

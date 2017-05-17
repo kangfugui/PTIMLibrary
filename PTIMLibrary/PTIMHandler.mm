@@ -90,7 +90,17 @@ void PTIMHandler::on_command_peer(PT::IM::IMReturnCode rc, uint32_t from_uid, co
 void PTIMHandler::on_confirm_peer(IMReturnCode rc, uint32_t from_uid, const std::string &local_id, const std::string &msg){
     printf("\non_confirm_peer: %s\n", [[NSString stringWithCString:msg.c_str() encoding:NSUTF8StringEncoding] UTF8String]);
     
+    PTIMCommandState state = PTIMCommandStateNone;
+    if (rc == IMRC_OK) {
+        state = PTIMCommandStateSuccess;
+    } else if (rc == IMRC_Timeouted) {
+        state = PTIMCommandStateTimeout;
+    } else {
+        state = PTIMCommandStateFail;
+    }
+    
     PTCommandMessage *message = [[PTCommandMessage alloc] init];
+    message.state = state;
     message.localID = [NSString stringWithCString:local_id.c_str() encoding:NSUTF8StringEncoding];
     message.content = [NSString stringWithCString:msg.c_str() encoding:NSUTF8StringEncoding];
     message.fromUsrID = from_uid;
