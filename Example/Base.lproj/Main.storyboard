@@ -29,11 +29,47 @@
                                     <action selector="lockButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zFe-lo-jQh"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msu-ed-csJ">
+                                <rect key="frame" x="16" y="78" width="62" height="30"/>
+                                <state key="normal" title="定时休息"/>
+                                <connections>
+                                    <action selector="restButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="C56-Oa-sfa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rbu-ev-fPK">
+                                <rect key="frame" x="16" y="128" width="62" height="30"/>
+                                <state key="normal" title="睡眠模式"/>
+                                <connections>
+                                    <action selector="sleepButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u9H-Nj-UW8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92Q-ly-M8S">
+                                <rect key="frame" x="16" y="178" width="62" height="30"/>
+                                <state key="normal" title="时段禁用"/>
+                                <connections>
+                                    <action selector="forbiddenButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sEz-X9-Aiz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfj-Ih-C2l">
+                                <rect key="frame" x="16" y="228" width="62" height="30"/>
+                                <state key="normal" title="每日限时"/>
+                                <connections>
+                                    <action selector="limitButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1O1-k0-7uY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="msu-ed-csJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="0Gm-Yf-S5z"/>
+                            <constraint firstItem="Rbu-ev-fPK" firstAttribute="top" secondItem="msu-ed-csJ" secondAttribute="bottom" constant="20" id="5JJ-08-lFK"/>
+                            <constraint firstItem="msu-ed-csJ" firstAttribute="top" secondItem="xwP-ZI-WDH" secondAttribute="bottom" constant="20" id="8T4-rc-TVa"/>
+                            <constraint firstItem="jfj-Ih-C2l" firstAttribute="top" secondItem="92Q-ly-M8S" secondAttribute="bottom" constant="20" id="D3D-ei-n6c"/>
+                            <constraint firstItem="jfj-Ih-C2l" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="D9h-5g-yk8"/>
+                            <constraint firstItem="92Q-ly-M8S" firstAttribute="top" secondItem="Rbu-ev-fPK" secondAttribute="bottom" constant="20" id="JjT-cC-ic6"/>
                             <constraint firstItem="xwP-ZI-WDH" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="aXB-te-Kxl"/>
                             <constraint firstItem="xwP-ZI-WDH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="mqd-AM-3HT"/>
+                            <constraint firstItem="92Q-ly-M8S" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="qxt-UG-wcc"/>
+                            <constraint firstItem="Rbu-ev-fPK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="yjK-HF-MiZ"/>
                         </constraints>
                     </view>
                 </viewController>
